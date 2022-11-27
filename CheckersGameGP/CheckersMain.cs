@@ -20,7 +20,7 @@ namespace CheckersGameGP
 
         private void PlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CheckersGameForm checkersGameForm = CheckersGameForm.CheckersGameFormInstance();
+            checkersGameForm checkersGameForm = checkersGameForm.CheckersGameFormInstance();
             checkersGameForm.MdiParent = this;
             checkersGameForm.Show();
         }
@@ -35,6 +35,14 @@ namespace CheckersGameGP
             AboutBox1 aboutBox1 = AboutBox1.AboutBoxFormInstance();
             aboutBox1.MdiParent = this;
             aboutBox1.Show();
+        }
+
+        private void instructionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Instructiosform instructiosform = Instructiosform.InstructiosformInstance();
+            instructiosform.MdiParent = this;
+            instructiosform.Show();
+
         }
     }
 }

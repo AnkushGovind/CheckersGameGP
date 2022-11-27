@@ -12,6 +12,11 @@ namespace DataAccessLayer
         //connection string
         string CGConnString = ConfigurationManager.ConnectionStrings["CheckersGameGP.Properties.Settings.CheckerConnectionString"].ConnectionString;
 
+        public CheckerGameDAClass()
+        {
+          if(CGConnection==null) CGConnection = new SqlConnection(CGConnString);
+        }       
+
         private SqlConnection GetConnection()
         {
             if (CGConnection == null) CGConnection = new SqlConnection(CGConnString);
@@ -86,7 +91,7 @@ namespace DataAccessLayer
             if (param3 != null) cgSqlCommand.Parameters.Add(param3);
             if (param4 != null) cgSqlCommand.Parameters.Add(param4);
             if (param5 != null) cgSqlCommand.Parameters.Add(param5);
-            if (param6 != null) cgSqlCommand.Parameters.Add(param6);
+          //  if (param6 != null) cgSqlCommand.Parameters.Add(param6);
 
             try
             {
@@ -138,7 +143,7 @@ namespace DataAccessLayer
 
             try
             {
-                SqlDataAdapter cgAdapter = new SqlDataAdapter(sqlString, this.GetConnection());
+                SqlDataAdapter cgAdapter = new SqlDataAdapter(sqlString, CGConnection);
                 this.OpenConnection();
                 cgAdapter.Fill(cgDataSet);
                 return cgDataSet;

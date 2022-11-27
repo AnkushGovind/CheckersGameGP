@@ -82,6 +82,15 @@
     <Compile Include="CheckersGameForm.Designer.cs">
       <DependentUpon>CheckersGameForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Iinstructions.cs" />
+    <Compile Include="InstructionChild.cs" />
+    <Compile Include="InstructionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstructionForm.Designer.cs">
+      <DependentUpon>InstructionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstructionsClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutBox1.resx">
@@ -92,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CheckersMain.resx">
       <DependentUpon>CheckersMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstructionForm.resx">
+      <DependentUpon>InstructionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -138,11 +150,11 @@
     <None Include="Resources\BlackPiece.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppData\Checker.mdf">
+    <Content Include="AppData\CheckersDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="AppData\Checker_log.ldf">
-      <DependentUpon>Checker.mdf</DependentUpon>
+    <Content Include="AppData\CheckersDB_log.ldf">
+      <DependentUpon>CheckersDB.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
