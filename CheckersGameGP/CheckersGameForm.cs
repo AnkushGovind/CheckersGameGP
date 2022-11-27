@@ -14,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CheckersGameGP
 {
-    internal partial class checkersGameForm : Form
+    internal partial class CheckersGameForm : Form
     {
         private enum MoveNames
         {
@@ -32,7 +32,7 @@ namespace CheckersGameGP
             Terrible = 12
         }//enum
         
-        private static checkersGameForm CheckersGameInstance;
+        private static CheckersGameForm CheckersGameInstance;
         //Declaring local variables
         private int n;   
         //b=black color, w=white color, bb=blue color
@@ -110,16 +110,16 @@ namespace CheckersGameGP
             if(response!=0) playPanel.Hide();
         }
 
-        public checkersGameForm()
+        public CheckersGameForm()
         {
             InitializeComponent();
         }
 
-        internal static checkersGameForm CheckersGameFormInstance()
+        internal static CheckersGameForm CheckersGameFormInstance()
         {
             //Singleton Form
             if (CheckersGameInstance == null)
-                CheckersGameInstance = new checkersGameForm();
+                CheckersGameInstance = new CheckersGameForm();
             return CheckersGameInstance;
         }
 

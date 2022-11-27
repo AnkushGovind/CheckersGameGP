@@ -1,6 +1,6 @@
 ﻿namespace CheckersGameGP
 {
-    partial class checkersGameForm
+    partial class CheckersGameForm
     {
         /// <summary>
         /// Required designer variable.
@@ -428,7 +428,7 @@
             this.label4.Size = new System.Drawing.Size(63, 63);
             this.label4.TabIndex = 7;
             // 
-            // checkersGameForm
+            // CheckersGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -448,7 +448,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MinimizeBox = false;
-            this.Name = "checkersGameForm";
+            this.Name = "CheckersGameForm";
             this.ShowIcon = false;
             this.Text = "Game Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CheckersGameForm_FormClosing);
