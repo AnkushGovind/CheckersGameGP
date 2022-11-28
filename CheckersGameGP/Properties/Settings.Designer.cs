@@ -33,5 +33,14 @@ namespace CheckersGameGP.Properties {
                 return ((string)(this["CheckerConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        public string abc {
+            get {
+                return ((string)(this["abc"]));
+            }
+        }
     }
 }

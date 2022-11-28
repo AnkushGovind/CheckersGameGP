@@ -68,7 +68,9 @@
     <Compile Include="AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
-    <Compile Include="CheckerGameDAClass.cs" />
+    <Compile Include="CheckerGameDAClass.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="CheckerIntermediaryClass.cs" />
     <Compile Include="CheckersMain.cs">
       <SubType>Form</SubType>
@@ -81,6 +83,18 @@
     </Compile>
     <Compile Include="CheckersGameForm.Designer.cs">
       <DependentUpon>CheckersGameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FeedBackForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FeedBackForm.Designer.cs">
+      <DependentUpon>FeedBackForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlayersHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayersHistory.Designer.cs">
+      <DependentUpon>PlayersHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="Iinstructions.cs" />
     <Compile Include="InstructionChild.cs" />
@@ -101,6 +115,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CheckersMain.resx">
       <DependentUpon>CheckersMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FeedBackForm.resx">
+      <DependentUpon>FeedBackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayersHistory.resx">
+      <DependentUpon>PlayersHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InstructionForm.resx">
       <DependentUpon>InstructionForm.cs</DependentUpon>

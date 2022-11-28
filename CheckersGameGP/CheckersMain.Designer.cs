@@ -137,6 +137,7 @@
             this.playersHistoryToolStripMenuItem.Name = "playersHistoryToolStripMenuItem";
             this.playersHistoryToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.playersHistoryToolStripMenuItem.Text = "Players History";
+            this.playersHistoryToolStripMenuItem.Click += new System.EventHandler(this.playersHistoryToolStripMenuItem_Click);
             // 
             // CheckersMain
             // 

@@ -10,15 +10,23 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CheckersGameGP
 {
     internal partial class CheckersGameForm : Form
     {
+        public CheckersGameForm()
+        {
+            InitializeComponent();
+        }
+
+        //enums to show names along with value for no:of checkers lost
         private enum MoveNames
         {
-            GoodStart=1,
+            Score = 0,
+            GoodStart = 1,
             Great = 2,
             Trey = 3,
             LittleJoe = 4,
@@ -30,18 +38,20 @@ namespace CheckersGameGP
             PuppyPaws = 10,
             Excellent = 11,
             Terrible = 12
-        }//enum
-        
+        }//end enum
+
+
+        CheckerIntermediaryClass checkerIntermediaryClass;
         private static CheckersGameForm CheckersGameInstance;
         //Declaring local variables
-        private int n;   
+        private int n;
         //b=black color, w=white color, bb=blue color
-        private string color = "b", k = "", B1 = "", B2 = "", k2 = "", Crt="";
-        private int black = 0, white = 0;   
+        private string color = "b", k = "", B1 = "", B2 = "", k2 = "", Crt = "";
+        private int black = 0, white = 0;
         PictureBox[,] pictureBox;
         DataSet data;
         private bool makeMove = false;
-        CheckerIntermediaryClass checkerIntermediaryClass;
+        public string winnnerName;
 
 
         //Play Again Button
@@ -62,9 +72,7 @@ namespace CheckersGameGP
 
             //Making values blank to play again
             p1ScoreLabel.Text = "0";
-            p2ScoreLabel.Text = "0";            
-            p1NameLabel.Text = "";
-            p2NameLabel.Text = "";           
+            p2ScoreLabel.Text = "0";
             white = 0;
             black = 0;
         }//Play Again Button Ends
@@ -73,47 +81,63 @@ namespace CheckersGameGP
         //Start Label click
         private void startLabel_Click(object sender, EventArgs e)
         {
-
-            if (p1FNTextBox.Text == "" || p1LNTextBox==null)
+            //validations for textboxex
+            if (p1FNTextBox.Text == "" || p1LNTextBox == null)
             {
                 errorLabel.Text = "Player First Name is Required";
                 return;
             }
 
-            if (p2FNTextBox.Text == "" || p2LNTextBox==null)
+            if (p2FNTextBox.Text == "" || p2LNTextBox == null)
             {
                 errorLabel.Text = "Players Last Name is Required";
                 return;
             }
 
-            if (p1GenderComboBox.SelectedIndex == -1 || p2GenderComboBox.SelectedIndex==-1)
+            if (p1GenderComboBox.SelectedIndex == -1 || p2GenderComboBox.SelectedIndex == -1)
             {
                 errorLabel.Text = "Players Gender is Required";
                 return;
             }
 
-            if (p1AgeTextBox.Text =="" || p2AgeTextBox==null)
+            if (p1AgeTextBox.Text == "" || p2AgeTextBox == null)
             {
                 errorLabel.Text = "Players Age is Required";
                 return;
             }
 
-            //Inserting Data into DB
-            string[] P1Info = {"P1", p1FNTextBox.Text, p1LNTextBox.Text, p1GenderComboBox.SelectedItem.ToString(), p1AgeTextBox.Text };
-            string[] P2Info = {"P2", p2FNTextBox.Text, p2LNTextBox.Text, p2GenderComboBox.SelectedItem.ToString(), p2AgeTextBox.Text };
+            //converting string to int
+            Int32.TryParse(p1AgeTextBox.Text, out int age1);
+            Int32.TryParse(p2AgeTextBox.Text, out int age2);
 
-            //Displaying Players Name
+            //Declaring array object and storeing Player1 and player2 info
+            object[] P1Info = { "P1", p1FNTextBox.Text, p1LNTextBox.Text, p1GenderComboBox.SelectedItem.ToString(), age1 };
+            object[] P2Info = { "P2", p2FNTextBox.Text, p2LNTextBox.Text, p2GenderComboBox.SelectedItem.ToString(), age2 };
+
+            //Displaying Players Name in textboxes
             p1NameLabel.Text = p1FNTextBox.Text + " " + p1LNTextBox.Text;
             p2NameLabel.Text = p2FNTextBox.Text + " " + p2LNTextBox.Text;
             checkerIntermediaryClass = new CheckerIntermediaryClass();
-            int response=checkerIntermediaryClass.AddRegistration(P1Info, P2Info);
-            if(response!=0) playPanel.Hide();
+
+            //calling intermediaryclass and passing objects
+            int response1 = checkerIntermediaryClass.AddRegistration(P1Info);
+            int response2 = checkerIntermediaryClass.AddRegistration(P2Info);
+            if (response2 != 0) playPanel.Hide();//closing panel 
         }
 
-        public CheckersGameForm()
+
+        //FeedBack Buuton
+        private void fdbButton_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
+
+            //Singleton form
+            FeedBackForm feedBackForm = FeedBackForm.FeedBackFormInstance();
+            feedBackForm.MdiParent = CheckersMain.ActiveForm;
+            feedBackForm.Show();
+
         }
+
+
 
         internal static CheckersGameForm CheckersGameFormInstance()
         {
@@ -123,10 +147,12 @@ namespace CheckersGameGP
             return CheckersGameInstance;
         }
 
+
+        //Game form load
         private void CheckersGameForm_Load(object sender, EventArgs e)
         {
             playPanel.Parent = this;
-            playPanel.BringToFront();    
+            playPanel.BringToFront();
             n = 8;
             //Creating picture box of 8*8 resolution
             pictureBox = new PictureBox[n, n];
@@ -147,23 +173,31 @@ namespace CheckersGameGP
                     pictureBox[i, j].Size = new Size(60, 60);
                     pictureBox[i, j].BackColor = colors[(j % 2 == 0) ? 1 : 0];
                     pictureBox[i, j].Location = new Point(left, top);
-                    left += 60;
+                    left += 60;// moving right by 60 resolution to add next pixturebox of resolution 60*60
                     pictureBox[i, j].Name = i + " " + j;
-                    if (i < (n / 2) - 1 && pictureBox[i, j].BackColor == Color.Black) { pictureBox[i, j].Image = Properties.Resources.BlackPiece; pictureBox[i, j].Name += " b"; }
+
+                    //Placinng white and black checkers based on the picturebox color
+                    if (i < (n / 2) - 1 && pictureBox[i, j].BackColor == Color.Black)
+                    { pictureBox[i, j].Image = Properties.Resources.BlackPiece; pictureBox[i, j].Name += " b"; }
                     else if (i > (n / 2) && pictureBox[i, j].BackColor == Color.Black)
-                    {
-                        pictureBox[i, j].Image = Properties.Resources.WhitePiece; pictureBox[i, j].Name += " w";
-                    }
+                    { pictureBox[i, j].Image = Properties.Resources.WhitePiece; pictureBox[i, j].Name += " w"; }
+
                     pictureBox[i, j].SizeMode = PictureBoxSizeMode.CenterImage;
                     panel1.Controls.Add(pictureBox[i, j]);
-                    GetQuestions();
+                    GetQuestions();//Gets questions from database
 
                     //Events to capture picturebox click
                     pictureBox[i, j].Click += (sender3, e3) =>
                     {
+                        //b for black color
+                        //w for white color
+                        //bb for blue color
+                        //B1 for blue checker on right 
+                        //B2 for blue checker on left
+                        //k current slected checker
                         if (makeMove == true)
                         {
-                            PictureBox p = sender3 as PictureBox;
+                            PictureBox p = sender3 as PictureBox;//Object is send
                             if (p.Image != null)
                             {
                                 int c = -1, x, y;
@@ -172,13 +206,13 @@ namespace CheckersGameGP
                                 {
                                     if (color == "b") color = "w";
                                     else color = "b";
-                                    x = Convert.ToInt32(k.Split(' ')[0]);
-                                    y = Convert.ToInt32(k.Split(' ')[1]);
+                                    x = Convert.ToInt32(k.Split(' ')[0]);//X-axis value
+                                    y = Convert.ToInt32(k.Split(' ')[1]);//y-axis value
                                     B1 = "";
                                     B2 = "";
                                     if (k.Split(' ')[2] == "b")
                                     {
-                                        p.Image = Properties.Resources.BlackPiece;
+                                        p.Image = Properties.Resources.BlackPiece;//setting image 
                                         p.Name = p.Name.Replace("bb", "b");
                                         makeMove = false;
                                     }
@@ -197,17 +231,19 @@ namespace CheckersGameGP
                                         pictureBox[x, y].Image = null;
                                         if (k2.Split(' ')[2] == "b") black++;
                                         else white++;
-                                         p1ScoreLabel.Text = black + " " + (MoveNames)black;
-                                        p2ScoreLabel.Text = white + " " + (MoveNames)black;
-                                        if (black >= 8)
+                                        p1ScoreLabel.Text = black + " " + (MoveNames)black;// using enums along with score
+                                        p2ScoreLabel.Text = white + " " + (MoveNames)white;
+                                        if (black >= 10)
                                         {
-                                            winLabel.Text = "You win " + p1NameLabel.Text;
+                                            winLabel.Text = "You won " + p1NameLabel.Text;
+                                            FeedBackForm feedBackForm = new FeedBackForm(winLabel.Text);
                                             winPanel.Visible = true;
                                         }
                                         else
-                                        if (white >= 8)
+                                        if (white >= 10)
                                         {
-                                            winLabel.Text = "You win " + p2NameLabel.Text;
+                                            winLabel.Text = "You won " + p2NameLabel.Text;
+                                            FeedBackForm feedBackForm = new FeedBackForm(winLabel.Text);
                                             winPanel.Visible = true;
                                         }
                                         k2 = "";
@@ -221,9 +257,9 @@ namespace CheckersGameGP
                                     y = Convert.ToInt32(p.Name.Split(' ')[1]);
                                     k = p.Name;
                                     if (p.Name.Split(' ')[2] == "b") c = 1;
-                                    try
+                                    try//try and catch block
                                     {
-                                        if (pictureBox[x + c, y + 1].Image == null)
+                                        if (pictureBox[x + c, y + 1].Image == null)//checking right digonal box for any checker
                                         {
                                             pictureBox[x + c, y + 1].Image = Properties.Resources.BluePiece;
                                             pictureBox[x + c, y + 1].Name = (x + c) + " " + (y + 1) + " bb";
@@ -242,7 +278,7 @@ namespace CheckersGameGP
                                     catch { }
                                     try
                                     {
-                                        if (pictureBox[x + c, y - 1].Image == null)
+                                        if (pictureBox[x + c, y - 1].Image == null)//checking left diagonal box for any checker
                                         {
                                             pictureBox[x + c, y - 1].Image = Properties.Resources.BluePiece;
                                             pictureBox[x + c, y - 1].Name = (x + c) + " " + (y - 1) + " bb";
@@ -271,10 +307,11 @@ namespace CheckersGameGP
                     };
 
                 }
-                top += 60;
-            }
+                top += 60;//moving down by 60 resolutions to add next row of picture boxes of resolution 60*60            }
 
-            optionBLabel.Click += (sender4, e4) =>
+
+                //option B CLick event
+                optionBLabel.Click += (sender4, e4) =>
             {
                 if (optionBLabel.Text == Crt)
                 {
@@ -292,27 +329,29 @@ namespace CheckersGameGP
                 }
             };
 
-            optionALabel.Click += (sender5, e5) =>
-            {
-                if (optionALabel.Text == Crt)
-                {
-                    optionALabel.BackColor = Color.Green;
-                    makeMove = true;
-                }
-                else
-                {
-                    makeMove = false;
-                    optionALabel.BackColor = Color.Red;
-                    if (color == "b") color = "w";
-                    else if (color == "w") color = "b";
-                }
-            };
-        }
 
-        private void CheckersGameForm_FormClosing(object sender, FormClosingEventArgs e)
+                //option A CLick Event
+                optionALabel.Click += (sender5, e5) =>
+                {
+                    if (optionALabel.Text == Crt)
+                    {
+                        optionALabel.BackColor = Color.Green;
+                        makeMove = true;
+                    }
+                    else
+                    {
+                        makeMove = false;
+                        optionALabel.BackColor = Color.Red;
+                        if (color == "b") color = "w";
+                        else if (color == "w") color = "b";
+                    }
+                };
+            }
+        }
+        private void CheckersGameForm_FormClosing(object sender3, FormClosingEventArgs e3)
         {
             CheckersGameInstance = null;
-        }
+        }//Closing form
 
 
         private void F()
@@ -332,6 +371,8 @@ namespace CheckersGameGP
                 pictureBox[x, y].Image = null;
             }
         }
+
+        //Get questions from DB
         private void GetQuestions()
         {
             optionBLabel.BackColor = Color.White;
@@ -346,8 +387,9 @@ namespace CheckersGameGP
             questionsLabel.Text = data.Tables[0].Rows[random]["Question"].ToString();
             optionALabel.Text = data.Tables[0].Rows[random]["OptionA"].ToString();
             optionBLabel.Text = data.Tables[0].Rows[random]["OptionB"].ToString();
-            Crt = data.Tables[0].Rows[random]["CorrectAnswer"].ToString();          
-        }
+            Crt = data.Tables[0].Rows[random]["CorrectAnswer"].ToString();
+        }//End GetQuestions
+
 
     }
 }

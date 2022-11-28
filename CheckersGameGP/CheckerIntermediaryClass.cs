@@ -9,7 +9,7 @@ namespace IntermediaryLayer
     //created by shwetha N.G
     public class CheckerIntermediaryClass : CheckerGameDAClass
     {
-        string Connstring;
+        //string Connstring;
         public CheckerIntermediaryClass() : base()
         {
         
@@ -40,6 +40,7 @@ namespace IntermediaryLayer
 
         }
 
+        // Gets questions from database 
         public DataSet GetQuestions()
         {
            
@@ -55,7 +56,9 @@ namespace IntermediaryLayer
             }
         }
 
-        public int AddRegistration(string[] P1Info, string[] P2Info)
+
+        //Add players informations into the database
+        public int AddRegistration(object[] PlayerInfo)
         {
             CheckerGameDAClass checkerData = new CheckerGameDAClass();
             string sqlQuery = "Insert into PlayerInfoTbl values(@PlayerType, @Firstname, @Lastname, @Gender, @Age);";
@@ -69,21 +72,59 @@ namespace IntermediaryLayer
 
             try
             {
-                param1.Value = P1Info[0];
-                param2.Value = P1Info[1];
-                param3.Value = P1Info[2];
-                param4.Value = P1Info[3];
-                param5.Value = P1Info[4];
-               // param6.Value = DateTime.Now;
-               int o= checkerData.ExecuNonQuery(sqlQuery, CommandType.Text, param1, param2, param3, param4, param5);
-           
-                param1.Value = P2Info[0];
-                param2.Value = P2Info[1];
-                param3.Value = P2Info[2];
-                param4.Value = P2Info[3];
-                param5.Value = P2Info[4];
-              //  param6.Value = DateTime.Now;
+                param1.Value = PlayerInfo[0];
+                param2.Value = PlayerInfo[1];
+                param3.Value = PlayerInfo[2];
+                param4.Value = PlayerInfo[3];
+                param5.Value = PlayerInfo[4];
+                // param6.Value = DateTime.Now;             
+            
                 return checkerData.ExecuNonQuery(sqlQuery, CommandType.Text, param1, param2, param3, param4, param5);
+            }
+
+            catch (Exception ex)
+            {
+                LastError = ex.Message;
+                return -1;
+            }
+        }//addFeedBack
+
+
+        //Retrives the information of all the players who have played
+        public DataTable PlayersHistory()
+        {
+            
+            string sqlQuery = "select * from PlayerInfoTbl;";
+            try
+            {
+                return this.GetTable(sqlQuery, CommandType.Text);
+            }
+            catch (Exception ex)
+            {
+                LastError = ex.Message;
+                return null;
+            }
+        }
+
+
+        //Inserts players feed back into COmments table
+        public int AddFeedBack(int gameId, string comments, string status)
+        {
+            CheckerGameDAClass checkerData = new CheckerGameDAClass();
+            string sqlQuery = "Insert into CommentTbl values(@GameId, @Comments, @Status);";
+            SqlParameter param1 = new SqlParameter("@GameId", SqlDbType.Int);
+            SqlParameter param2 = new SqlParameter("@Comments", SqlDbType.NVarChar);
+            SqlParameter param3 = new SqlParameter("@Status", SqlDbType.VarChar);
+
+
+
+            param1.Value = gameId;
+            param2.Value = comments;
+            param3.Value = status;
+
+            try
+            {
+                return checkerData.ExecuNonQuery(sqlQuery, CommandType.Text, param1, param2, param3);
             }
 
             catch (Exception ex)

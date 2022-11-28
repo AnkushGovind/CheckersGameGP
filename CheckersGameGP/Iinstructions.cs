@@ -10,5 +10,6 @@ namespace CheckersGameGP
     {
         string GetNextInstruction();
 
-    }
-}
+
+    }//interface
+}//namespace

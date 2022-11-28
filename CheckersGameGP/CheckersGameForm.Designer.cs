@@ -64,6 +64,7 @@
             this.winPanel = new System.Windows.Forms.Panel();
             this.winLabel = new System.Windows.Forms.Label();
             this.playAgainLabel = new System.Windows.Forms.Label();
+            this.fdbButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -127,51 +128,52 @@
             this.playPanel.Controls.Add(this.label14);
             this.playPanel.Controls.Add(this.label1);
             this.playPanel.Controls.Add(this.startLabel);
+            this.playPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.playPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playPanel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.playPanel.Location = new System.Drawing.Point(507, 429);
+            this.playPanel.Location = new System.Drawing.Point(0, 0);
             this.playPanel.Name = "playPanel";
-            this.playPanel.Size = new System.Drawing.Size(567, 195);
+            this.playPanel.Size = new System.Drawing.Size(1074, 624);
             this.playPanel.TabIndex = 5;
             // 
             // p2AgeTextBox
             // 
-            this.p2AgeTextBox.Location = new System.Drawing.Point(805, 266);
+            this.p2AgeTextBox.Location = new System.Drawing.Point(835, 335);
             this.p2AgeTextBox.Name = "p2AgeTextBox";
             this.p2AgeTextBox.Size = new System.Drawing.Size(100, 36);
             this.p2AgeTextBox.TabIndex = 7;
             // 
             // p2LNTextBox
             // 
-            this.p2LNTextBox.Location = new System.Drawing.Point(805, 150);
+            this.p2LNTextBox.Location = new System.Drawing.Point(835, 219);
             this.p2LNTextBox.Name = "p2LNTextBox";
             this.p2LNTextBox.Size = new System.Drawing.Size(100, 36);
             this.p2LNTextBox.TabIndex = 7;
             // 
             // p2FNTextBox
             // 
-            this.p2FNTextBox.Location = new System.Drawing.Point(805, 94);
+            this.p2FNTextBox.Location = new System.Drawing.Point(835, 163);
             this.p2FNTextBox.Name = "p2FNTextBox";
             this.p2FNTextBox.Size = new System.Drawing.Size(100, 36);
             this.p2FNTextBox.TabIndex = 7;
             // 
             // p1AgeTextBox
             // 
-            this.p1AgeTextBox.Location = new System.Drawing.Point(212, 278);
+            this.p1AgeTextBox.Location = new System.Drawing.Point(242, 347);
             this.p1AgeTextBox.Name = "p1AgeTextBox";
             this.p1AgeTextBox.Size = new System.Drawing.Size(100, 36);
             this.p1AgeTextBox.TabIndex = 7;
             // 
             // p1LNTextBox
             // 
-            this.p1LNTextBox.Location = new System.Drawing.Point(212, 155);
+            this.p1LNTextBox.Location = new System.Drawing.Point(242, 224);
             this.p1LNTextBox.Name = "p1LNTextBox";
             this.p1LNTextBox.Size = new System.Drawing.Size(100, 36);
             this.p1LNTextBox.TabIndex = 7;
             // 
             // p1FNTextBox
             // 
-            this.p1FNTextBox.Location = new System.Drawing.Point(212, 101);
+            this.p1FNTextBox.Location = new System.Drawing.Point(242, 170);
             this.p1FNTextBox.Name = "p1FNTextBox";
             this.p1FNTextBox.Size = new System.Drawing.Size(100, 36);
             this.p1FNTextBox.TabIndex = 7;
@@ -191,7 +193,7 @@
             this.p1GenderComboBox.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.p1GenderComboBox.Location = new System.Drawing.Point(212, 214);
+            this.p1GenderComboBox.Location = new System.Drawing.Point(242, 283);
             this.p1GenderComboBox.Name = "p1GenderComboBox";
             this.p1GenderComboBox.Size = new System.Drawing.Size(121, 37);
             this.p1GenderComboBox.TabIndex = 5;
@@ -202,7 +204,7 @@
             this.p2GenderComboBox.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.p2GenderComboBox.Location = new System.Drawing.Point(805, 210);
+            this.p2GenderComboBox.Location = new System.Drawing.Point(835, 279);
             this.p2GenderComboBox.Name = "p2GenderComboBox";
             this.p2GenderComboBox.Size = new System.Drawing.Size(121, 37);
             this.p2GenderComboBox.TabIndex = 5;
@@ -210,7 +212,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(648, 266);
+            this.label13.Location = new System.Drawing.Point(678, 335);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(58, 29);
             this.label13.TabIndex = 3;
@@ -219,7 +221,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(648, 210);
+            this.label12.Location = new System.Drawing.Point(678, 279);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(96, 29);
             this.label12.TabIndex = 3;
@@ -228,7 +230,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(41, 278);
+            this.label9.Location = new System.Drawing.Point(71, 347);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(58, 29);
             this.label9.TabIndex = 3;
@@ -237,7 +239,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(648, 158);
+            this.label11.Location = new System.Drawing.Point(678, 227);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(136, 29);
             this.label11.TabIndex = 3;
@@ -246,7 +248,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(41, 222);
+            this.label7.Location = new System.Drawing.Point(71, 291);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(96, 29);
             this.label7.TabIndex = 3;
@@ -255,7 +257,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(41, 158);
+            this.label5.Location = new System.Drawing.Point(71, 227);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(136, 29);
             this.label5.TabIndex = 3;
@@ -264,7 +266,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(648, 101);
+            this.label10.Location = new System.Drawing.Point(678, 170);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(137, 29);
             this.label10.TabIndex = 1;
@@ -282,7 +284,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(719, 27);
+            this.label15.Location = new System.Drawing.Point(739, 83);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(154, 29);
             this.label15.TabIndex = 1;
@@ -291,7 +293,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(63, 35);
+            this.label14.Location = new System.Drawing.Point(115, 83);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(154, 29);
             this.label14.TabIndex = 1;
@@ -300,7 +302,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 101);
+            this.label1.Location = new System.Drawing.Point(71, 170);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(137, 29);
             this.label1.TabIndex = 1;
@@ -380,31 +382,47 @@
             this.winPanel.Controls.Add(this.winLabel);
             this.winPanel.Controls.Add(this.playPanel);
             this.winPanel.Controls.Add(this.playAgainLabel);
-            this.winPanel.Location = new System.Drawing.Point(706, 593);
+            this.winPanel.Controls.Add(this.fdbButton);
+            this.winPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.winPanel.Location = new System.Drawing.Point(0, 0);
             this.winPanel.Name = "winPanel";
-            this.winPanel.Size = new System.Drawing.Size(368, 31);
+            this.winPanel.Size = new System.Drawing.Size(1074, 624);
             this.winPanel.TabIndex = 0;
             this.winPanel.Visible = false;
             // 
             // winLabel
             // 
             this.winLabel.AutoSize = true;
+            this.winLabel.BackColor = System.Drawing.Color.Gold;
             this.winLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.winLabel.Location = new System.Drawing.Point(467, 244);
+            this.winLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.winLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.winLabel.Location = new System.Drawing.Point(422, 248);
             this.winLabel.Name = "winLabel";
-            this.winLabel.Size = new System.Drawing.Size(2, 18);
+            this.winLabel.Size = new System.Drawing.Size(2, 31);
             this.winLabel.TabIndex = 0;
             // 
             // playAgainLabel
             // 
-            this.playAgainLabel.AutoSize = true;
-            this.playAgainLabel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.playAgainLabel.Location = new System.Drawing.Point(464, 380);
+            this.playAgainLabel.BackColor = System.Drawing.Color.LimeGreen;
+            this.playAgainLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.playAgainLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playAgainLabel.Location = new System.Drawing.Point(404, 380);
             this.playAgainLabel.Name = "playAgainLabel";
-            this.playAgainLabel.Size = new System.Drawing.Size(72, 16);
+            this.playAgainLabel.Size = new System.Drawing.Size(100, 28);
             this.playAgainLabel.TabIndex = 1;
             this.playAgainLabel.Text = "Play Again";
             this.playAgainLabel.Click += new System.EventHandler(this.PlayAgainLabel_Click);
+            // 
+            // fdbButton
+            // 
+            this.fdbButton.Location = new System.Drawing.Point(582, 380);
+            this.fdbButton.Name = "fdbButton";
+            this.fdbButton.Size = new System.Drawing.Size(105, 28);
+            this.fdbButton.TabIndex = 6;
+            this.fdbButton.Text = "FeedBack";
+            this.fdbButton.UseVisualStyleBackColor = true;
+            this.fdbButton.Click += new System.EventHandler(this.fdbButton_Click);
             // 
             // contextMenuStrip1
             // 
@@ -502,5 +520,6 @@
         private System.Windows.Forms.TextBox p1LNTextBox;
         private System.Windows.Forms.TextBox p1FNTextBox;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button fdbButton;
     }
 }
